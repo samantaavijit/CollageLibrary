@@ -52,6 +52,12 @@
       </div>
     </nav>
 
+    <!-- Message -->
+
+    <div id="message">
+      
+    </div>
+
     <!-- Container -->
     <div class="container my-2">
       <center><h1>Sukanta Library</h1></center>
@@ -91,6 +97,7 @@
                 name="type"
                 id="fiction"
                 value="fiction"
+                checked
               />
               <label class="form-check-label" for="fiction">Fiction </label>
             </div>
@@ -128,25 +135,20 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Name</th>
-              <th scope="col">Auther</th>
+              <th scope="col">Author</th>
               <th scope="col">Type</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
+          <tbody id="tableBody">
+            <!-- Add data from js -->
           </tbody>
         </table>
       </div>
     </div>
 
-    <script src="js/index.js"></script>
+    <!-- <script src="js/index.js"></script> -->
+    <script src="js/indexEs6.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
