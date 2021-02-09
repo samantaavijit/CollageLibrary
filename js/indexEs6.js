@@ -12,16 +12,21 @@ class Book {
 
 class Display {
   add(book) {
-    console.log("Adding data to table");
-    let tableBody = document.getElementById("tableBody");
-    let uiString = `
-            <tr>
-                <td>${book.name}</td>
-                <td>${book.author}</td>
-                <td>${book.type}</td>
-            </tr>
-  `;
-    tableBody.innerHTML += uiString;
+    let books = localStorage.getItem("books");
+    let booksObj;
+    if (books == null) {
+      booksObj = [];
+    } else {
+      booksObj = JSON.parse(books);
+    }
+    let myObj = {
+      name: book.name,
+      author: book.author,
+      type: book.type,
+    };
+    booksObj.push(myObj);
+    localStorage.setItem("books", JSON.stringify(booksObj));
+    showBooks();
   }
 
   clear() {
@@ -35,7 +40,7 @@ class Display {
     return true;
   }
 
-  show(type, msg) {
+  showMessage(type, msg) {
     let message = document.getElementById("message");
     message.innerHTML = `
   <div class="alert alert-${type} alert-dismissible fade show" role="alert">
@@ -45,10 +50,31 @@ class Display {
 `;
     setTimeout(function () {
       message.innerHTML = "";
-    }, 5000);
+    }, 3000);
   }
 }
 
+showBooks();
+function showBooks() {
+  let books = localStorage.getItem("books");
+  if (books == null) {
+    booksObj = [];
+  } else {
+    booksObj = JSON.parse(books);
+
+    let tableBody = document.getElementById("tableBody");
+    let uiString;
+    booksObj.forEach(function (element, index) {
+      uiString += `<tr>
+            <td>${element.name}</td>
+            <td>${element.author}</td>
+            <td>${element.type}</td>
+        </tr>
+      `;
+    });
+    tableBody.innerHTML += uiString;
+  }
+}
 // Add submit event listener to libraryForm
 libraryForm.addEventListener("submit", libraryFormSubmit);
 
@@ -68,8 +94,8 @@ function libraryFormSubmit(e) {
   if (display.validate(book)) {
     display.add(book);
     display.clear();
-    display.show("success", `${book.name} is added successfully`);
+    display.showMessage("success", `${book.name} is added successfully`);
   } else {
-    display.show("danger", "Sorry you can't add this book");
+    display.showMessage("danger", "Sorry you can't add this book");
   }
 }
